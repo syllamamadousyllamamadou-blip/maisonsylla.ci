@@ -13,34 +13,34 @@ app.add_middleware(
 
 @app.get("/api")
 def lire_produits():
-    # Catalogue mis à jour pour un rendu professionnel en Franc CFA
+    # Catalogue mis à jour pour Maison Sylla (Images réelles au lieu d'emojis)
     return [
         {
             "id": 1, 
-            "nom": "Sac en Cuir Artisanal", 
-            "description": "Fait main avec passion. Élégant et robuste pour votre quotidien.",
-            "prix": 25000, 
-            "image": "👜"
+            "nom": "Le Sac Classique", 
+            "description": "Cuir véritable, finitions parfaites.",
+            "prix": 45000, 
+            "image": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
         },
         {
             "id": 2, 
-            "nom": "Collier Traditionnel", 
-            "description": "Authenticité et raffinement pour sublimer vos tenues.",
-            "prix": 12500, 
-            "image": "📿"
+            "nom": "Collier Minimaliste", 
+            "description": "Argent massif, élégance discrète.",
+            "prix": 25000, 
+            "image": "https://images.unsplash.com/photo-1599643478524-fb66f7280459?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
         },
         {
             "id": 3, 
-            "nom": "Ensemble Coton Bio", 
-            "description": "Confort absolu et respect de l'environnement.",
-            "prix": 18000, 
-            "image": "👕"
+            "nom": "Lunettes Signature", 
+            "description": "Design épuré et protection optimale.",
+            "prix": 30000, 
+            "image": "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
         },
         {
             "id": 4, 
-            "nom": "Sandales Tressées", 
-            "description": "Légères et confortables, parfaites pour la saison.",
-            "prix": 15000, 
-            "image": "👡"
+            "nom": "Montre Précision", 
+            "description": "Mouvement à quartz, bracelet en cuir noir.",
+            "prix": 85000, 
+            "image": "https://images.unsplash.com/photo-1524592094714-0f0654ece975?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
         }
     ]
