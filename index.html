@@ -52,9 +52,12 @@
             display: flex;
             justify-content: center;
         }
+        
+        /* MAGIE : Détourage automatique du logo ! */
         .logo img {
-            height: 80px; /* Logo beaucoup plus grand et premium */
+            height: 70px; 
             object-fit: contain;
+            mix-blend-mode: multiply; /* Supprime le fond blanc de l'image */
         }
 
         .nav-right {
@@ -68,7 +71,7 @@
             border: 1px solid var(--primary);
             color: var(--primary);
             padding: 10px 20px;
-            border-radius: 0px; /* Bords carrés style luxe */
+            border-radius: 0px;
             font-family: 'Poppins', sans-serif;
             font-weight: 400;
             cursor: pointer;
@@ -84,6 +87,16 @@
         .panier-btn:hover {
             background: var(--primary);
             color: var(--white);
+        }
+
+        /* Animation quand on ajoute un article */
+        @keyframes pulse-cart {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); background-color: var(--primary); color: var(--white); }
+            100% { transform: scale(1); }
+        }
+        .pulse {
+            animation: pulse-cart 0.4s ease;
         }
 
         /* --- HERO SECTION --- */
@@ -135,19 +148,10 @@
 
         .produit-carte {
             background: var(--white);
-            border-radius: 0px;
-            padding: 0;
             text-align: left;
-            box-shadow: none;
-            transition: transform 0.3s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            border: 1px solid transparent;
-        }
-
-        .produit-carte:hover {
-            transform: translateY(-5px);
         }
 
         .produit-image-container {
@@ -195,7 +199,6 @@
             color: var(--primary);
             border: 1px solid var(--primary);
             padding: 12px;
-            border-radius: 0px;
             font-size: 13px;
             font-weight: 400;
             text-transform: uppercase;
@@ -216,7 +219,6 @@
             color: var(--white);
             padding: 60px 20px 30px;
             text-align: center;
-            border-top: none;
             margin-top: 80px;
         }
 
@@ -234,13 +236,10 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
-        .badge span { display: none; } /* On masque les emojis du footer pour le côté luxe */
         
-        /* Surcharge pour le footer */
         footer p { color: #999999 !important; }
 
-        /* --- NOUVEAUTÉS : TOAST ET MODAL --- */
+        /* --- TOAST & MODAL --- */
         #toast {
             visibility: hidden;
             min-width: 250px;
@@ -248,13 +247,39 @@
             color: var(--white);
             text-transform: uppercase;
             letter-spacing: 1px;
-            border-radius: 0px;
+            font-size: 12px;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+        /* Correction du Modal */
+        .modal {
+            display: none; /* C'est cette ligne qui foirait dans ton code ! */
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
             align-items: center;
         }
         .modal-content {
             background-color: var(--white);
             padding: 40px;
-            border-radius: 0px;
             width: 90%;
             max-width: 500px;
             max-height: 90vh;
@@ -265,7 +290,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 15px;
         }
@@ -292,14 +317,14 @@
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-dark);
+            text-transform: uppercase;
         }
         .form-group input {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border-color);
-            border-radius: 0px;
             font-family: inherit;
             background-color: #FAFAFA;
         }
@@ -310,30 +335,33 @@
         #cart-summary {
             background: #FAFAFA;
             border: 1px solid var(--border-color);
-            border-radius: 0px;
             padding: 15px;
             margin-bottom: 20px;
+            font-size: 14px;
         }
-        #cart-summary ul { padding-left: 20px; margin-top: 10px; }
+        #cart-summary ul { padding-left: 20px; margin-top: 10px; margin-bottom: 10px;}
         #cart-summary li { margin-bottom: 5px; }
+        
+        .disclaimer {
+            font-size: 12px;
+            color: var(--text-light);
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
         .btn-valider {
             background: var(--primary);
             color: var(--white);
             border: none;
             padding: 15px;
-            border-radius: 0px;
-            font-size: 14px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 400;
             cursor: pointer;
             width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
             transition: background 0.3s;
-            margin-top: 20px;
         }
         .btn-valider:hover { background: var(--primary-hover); }
     </style>
@@ -347,7 +375,7 @@
             <img src="https://i.postimg.cc/brmfSTwX/Gemini-Generated-Image-r0pb7rr0pb7rr0pb.png" alt="Maison Sylla">
         </div>
         <div class="nav-right">
-            <button class="panier-btn" onclick="voirPanier()">
+            <button id="btn-panier-haut" class="panier-btn" onclick="voirPanier()">
                 Panier <span id="compteur-panier" style="margin-left: 5px;">(0)</span>
             </button>
         </div>
@@ -367,98 +395,115 @@
         </div>
     </main>
 
-    <!-- Pied de page (Réassurance Client) -->
+    <!-- Pied de page -->
     <footer>
         <div class="reassurance">
             <div class="badge">Paiement Sécurisé</div>
             <div class="badge">Livraison Premium</div>
             <div class="badge">Service Clientèle</div>
         </div>
-        <p style="color: var(--text-light); font-size: 13px;">&copy; 2026 Maison Sylla. Tous droits réservés.</p>
+        <p>&copy; 2026 Maison Sylla. Tous droits réservés.</p>
     </footer>
 
-    <!-- Notification Toast (Non intrusive) -->
+    <!-- Notification Toast -->
     <div id="toast">Article ajouté au panier !</div>
 
     <!-- Modal de Validation de Commande -->
     <div id="modal-commande" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Finaliser la commande</h2>
+                <h2>Votre Commande</h2>
                 <span class="close-btn" onclick="fermerModal()">&times;</span>
             </div>
             
             <div id="cart-summary">
-                <!-- Le résumé du panier sera injecté ici par JavaScript -->
+                <!-- Injecté par JS -->
             </div>
 
             <form id="form-commande" onsubmit="envoyerCommande(event)">
-            <div class="form-group">
-                <label for="client-nom">Nom & Prénom</label>
-                <input type="text" id="client-nom" required placeholder="Ex: Jean Dupont">
-            </div>
-            <div class="form-group">
-                <label for="client-ville">Ville / Quartier</label>
-                <input type="text" id="client-ville" required placeholder="Ex: Abidjan, Cocody">
-            </div>
-            <div class="form-group">
-                <label for="client-tel">Téléphone</label>
-                <input type="tel" id="client-tel" placeholder="Pour la livraison">
-            </div>
-            <button type="submit" class="btn-valider">
-                Valider la commande
-            </button>
-        </form>
+                <div class="form-group">
+                    <label for="client-nom">Nom & Prénom</label>
+                    <input type="text" id="client-nom" required placeholder="Ex: Jean Dupont">
+                </div>
+                <div class="form-group">
+                    <label for="client-ville">Ville / Quartier</label>
+                    <input type="text" id="client-ville" required placeholder="Ex: Abidjan, Cocody">
+                </div>
+                <div class="form-group">
+                    <label for="client-tel">Téléphone</label>
+                    <input type="tel" id="client-tel" placeholder="Pour la livraison">
+                </div>
+                
+                <p class="disclaimer">Vous allez être redirigé vers WhatsApp pour confirmer votre commande avec notre équipe en toute sécurité.</p>
+                
+                <button type="submit" class="btn-valider">
+                    Valider la commande
+                </button>
+            </form>
         </div>
     </div>
 
     <!-- LOGIQUE JAVASCRIPT -->
     <script>
-        // Variables du panier intelligent
-        let panier = {}; // Va stocker les articles (ex: "Sac": {prix: 25000, quantite: 1})
+        // Variables du panier
+        let panier = {}; 
         let panierArticles = 0;
         let panierTotal = 0;
 
-        // TON NUMÉRO WHATSAPP (Format international sans le "+")
+        // TON NUMÉRO WHATSAPP 
         const NUMERO_WHATSAPP = "2250758245530"; 
 
-        // Fonction pour formater en Franc CFA propre (ex: 15 000 FCFA)
         function formaterFCFA(montant) {
             return new Intl.NumberFormat('fr-FR').format(montant) + ' FCFA';
         }
 
-        // --- NOUVEAU : Fonction pour afficher la notification discrète ---
         function afficherToast(message) {
             const toast = document.getElementById("toast");
             toast.innerText = message;
             toast.className = "show";
-            // Fait disparaître la notification après 3 secondes
             setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         }
 
-        // Fonction d'ajout au panier
-    function ajouterAuPanier(prix, nom) {
-        if (panier[nom]) {
-            panier[nom].quantite++;
-        } else {
-            panier[nom] = { prix: prix, quantite: 1 };
+        // Fonction d'ajout au panier AVEC RETOUR VISUEL CLAIR
+        function ajouterAuPanier(prix, nom, bouton) {
+            if (panier[nom]) {
+                panier[nom].quantite++;
+            } else {
+                panier[nom] = { prix: prix, quantite: 1 };
+            }
+
+            panierArticles++;
+            panierTotal += prix;
+            
+            // Mise à jour du compteur
+            const btnPanierHaut = document.getElementById('btn-panier-haut');
+            document.getElementById('compteur-panier').innerText = `(${panierArticles})`;
+            
+            // Animation du bouton panier en haut
+            btnPanierHaut.classList.remove('pulse');
+            void btnPanierHaut.offsetWidth; // Force le redémarrage de l'animation
+            btnPanierHaut.classList.add('pulse');
+
+            // Animation du bouton cliqué (retour visuel pour le client)
+            const texteOriginal = bouton.innerText;
+            bouton.innerText = "AJOUTÉ ✓";
+            bouton.style.backgroundColor = "var(--primary)";
+            bouton.style.color = "var(--white)";
+            
+            setTimeout(() => {
+                bouton.innerText = texteOriginal;
+                bouton.style.backgroundColor = "";
+                bouton.style.color = "";
+            }, 1500);
+
+            afficherToast(nom + " a été ajouté.");
         }
 
-        panierArticles++;
-        panierTotal += prix;
-        
-        document.getElementById('compteur-panier').innerText = `(${panierArticles})`;
-        
-        // On utilise la nouvelle notification élégante sans emoji !
-        afficherToast(nom + " a été ajouté.");
-    }
-
-    // --- NOUVEAU : Gestion de la fenêtre Modale ---
+        // Gestion de la fenêtre Modale
         function fermerModal() {
             document.getElementById('modal-commande').style.display = "none";
         }
 
-        // Fermer la modale si on clique dans le vide (en dehors du cadre blanc)
         window.onclick = function(event) {
             const modal = document.getElementById('modal-commande');
             if (event.target == modal) {
@@ -466,118 +511,105 @@
             }
         }
 
-        // Fonction pour afficher le panier et le formulaire
         function voirPanier() {
             if(panierArticles === 0) {
-                afficherToast("Votre panier est vide. Ajoutez des produits.");
+                afficherToast("Votre panier est vide.");
                 return;
             } 
 
-            // Construire le résumé visuel du panier
-            let htmlResume = "<strong>Votre panier :</strong><ul>";
+            let htmlResume = "<strong>Votre sélection :</strong><ul>";
             for (const [nom, details] of Object.entries(panier)) {
                 let prixLigne = details.prix * details.quantite;
                 htmlResume += `<li>${details.quantite}x ${nom} - ${formaterFCFA(prixLigne)}</li>`;
             }
-            htmlResume += `</ul><p style="font-size: 18px; margin-top: 10px; color: var(--primary);"><strong>Total : ${formaterFCFA(panierTotal)}</strong></p>`;
+            htmlResume += `</ul><p style="font-size: 16px; margin-top: 15px; border-top: 1px solid #E5E5E5; padding-top:10px;"><strong>TOTAL : ${formaterFCFA(panierTotal)}</strong></p>`;
             
             document.getElementById('cart-summary').innerHTML = htmlResume;
-            
-            // Afficher la modale
             document.getElementById('modal-commande').style.display = "flex";
         }
 
-        // Fonction activée quand le client clique sur "Commander via WhatsApp"
-    function envoyerCommande(event) {
-        event.preventDefault(); // Empêche le rechargement de la page
+        function envoyerCommande(event) {
+            event.preventDefault(); 
 
-        // Récupération des infos tapées par le client
-        const nomClient = document.getElementById('client-nom').value;
-        const villeClient = document.getElementById('client-ville').value;
-        const telClient = document.getElementById('client-tel').value;
+            const nomClient = document.getElementById('client-nom').value;
+            const villeClient = document.getElementById('client-ville').value;
+            const telClient = document.getElementById('client-tel').value;
 
-        // Construction du message WhatsApp
-        let message = `Bonjour Maison Sylla,\n\n`;
-        message += `Je suis ${nomClient}\n`;
-        message += `Livraison : ${villeClient}\n`;
-        if(telClient) message += `Contact : ${telClient}\n`;
-        message += `\nJe souhaite valider la commande suivante :\n\n`;
-        
-        for (const [nom, details] of Object.entries(panier)) {
-            let prixLigne = details.prix * details.quantite;
-            message += `- ${details.quantite}x ${nom} (${formaterFCFA(prixLigne)})\n`;
+            let message = `Bonjour Maison Sylla,\n\n`;
+            message += `Je suis ${nomClient}\n`;
+            message += `Livraison : ${villeClient}\n`;
+            if(telClient) message += `Contact : ${telClient}\n`;
+            message += `\nJe souhaite valider la commande suivante :\n\n`;
+            
+            for (const [nom, details] of Object.entries(panier)) {
+                let prixLigne = details.prix * details.quantite;
+                message += `- ${details.quantite}x ${nom} (${formaterFCFA(prixLigne)})\n`;
+            }
+            
+            message += `\nTOTAL : ${formaterFCFA(panierTotal)}\n\n`;
+            message += "Merci de m'indiquer la marche à suivre pour la livraison.";
+
+            let messageEncode = encodeURIComponent(message);
+            
+            fermerModal();
+            window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${messageEncode}`, '_blank');
+
+            // VIDER LE PANIER APRÈS LA COMMANDE
+            panier = {};               
+            panierArticles = 0;        
+            panierTotal = 0;           
+            
+            document.getElementById('compteur-panier').innerText = "(0)";
+            document.getElementById('form-commande').reset(); 
+
+            setTimeout(() => afficherToast("Préparation de votre WhatsApp..."), 500);
         }
-        
-        message += `\nTOTAL : ${formaterFCFA(panierTotal)}\n\n`;
-        message += "Merci de m'indiquer la marche à suivre pour la livraison.";
 
-        let messageEncode = encodeURIComponent(message);
-        
-        // Fermer la fenêtre et ouvrir WhatsApp
-        fermerModal();
-        window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${messageEncode}`, '_blank');
+        // Récupération des produits
+        const conteneur = document.getElementById('grille-produits');
 
-        // --- NOUVEAUTÉ : VIDER LE PANIER APRÈS LA COMMANDE ---
-        panier = {};               
-        panierArticles = 0;        
-        panierTotal = 0;           
-        
-        // Met à jour l'affichage en haut de la page
-        document.getElementById('compteur-panier').innerText = "(0)";
-        
-        // Vide les champs du formulaire (Nom, Ville, Tel)
-        document.getElementById('form-commande').reset(); 
+        const produitsSecours = [
+            {
+                "id": 1, 
+                "nom": "Le Sac Classique", 
+                "description": "Cuir véritable, finitions parfaites.", 
+                "prix": 45000, 
+                "image": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                "id": 2, 
+                "nom": "Collier Minimaliste", 
+                "description": "Argent massif, élégance discrète.", 
+                "prix": 25000, 
+                "image": "https://images.unsplash.com/photo-1599643478524-fb66f7280459?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            }
+        ];
 
-        // Petit message sympa pour le retour sur le site
-        setTimeout(() => afficherToast("Merci pour votre commande."), 1000);
-    }
-
-    // Récupération des produits depuis le serveur Python
-    const conteneur = document.getElementById('grille-produits');
-
-    // Données de secours au cas où le serveur Python dort (Vercel Serverless)
-    const produitsSecours = [
-        {
-            "id": 1, 
-            "nom": "Le Sac Classique", 
-            "description": "Cuir véritable, finitions parfaites.", 
-            "prix": 45000, 
-            "image": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-        },
-        {
-            "id": 2, 
-            "nom": "Collier Minimaliste", 
-            "description": "Argent massif, élégance discrète.", 
-            "prix": 25000, 
-            "image": "https://images.unsplash.com/photo-1599643478524-fb66f7280459?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-        }
-    ];
-
-    function afficherProduits(produits) {
-        conteneur.innerHTML = ''; 
-        produits.forEach(produit => {
-            const article = document.createElement('article');
-            article.className = 'produit-carte';
-            article.innerHTML = `
-                <div>
-                    <div class="produit-image-container">
-                        <img src="${produit.image}" alt="${produit.nom}" class="produit-image-img">
+        function afficherProduits(produits) {
+            conteneur.innerHTML = ''; 
+            produits.forEach(produit => {
+                const article = document.createElement('article');
+                article.className = 'produit-carte';
+                article.innerHTML = `
+                    <div>
+                        <div class="produit-image-container">
+                            <img src="${produit.image}" alt="${produit.nom}" class="produit-image-img">
+                        </div>
+                        <h3 class="produit-nom">${produit.nom}</h3>
+                        <p class="produit-desc">${produit.description}</p>
                     </div>
-                    <h3 class="produit-nom">${produit.nom}</h3>
-                    <p class="produit-desc">${produit.description}</p>
-                </div>
-                <div>
-                    <div class="produit-prix">${formaterFCFA(produit.prix)}</div>
-                    <button class="btn-acheter" onclick="ajouterAuPanier(${produit.prix}, '${produit.nom.replace(/'/g, "\\'")}')">
-                        Ajouter au panier
-                    </button>
-                </div>
-            `;
-            conteneur.appendChild(article);
-        });
-    }
+                    <div>
+                        <div class="produit-prix">${formaterFCFA(produit.prix)}</div>
+                        <!-- Note ici le 'this' passé dans la fonction pour modifier le bouton cliqué ! -->
+                        <button class="btn-acheter" onclick="ajouterAuPanier(${produit.prix}, '${produit.nom.replace(/'/g, "\\'")}', this)">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                `;
+                conteneur.appendChild(article);
+            });
+        }
 
-    // Appel à l'API Python
         fetch('/api')
             .then(response => {
                 if(!response.ok) throw new Error("API indisponible");
@@ -585,7 +617,7 @@
             })
             .then(produits => afficherProduits(produits))
             .catch(erreur => {
-                console.log("Utilisation des données de secours en attendant le serveur Python.");
+                console.log("Utilisation des données de secours.");
                 afficherProduits(produitsSecours);
             });
     </script>
