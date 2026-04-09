@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Authentique | Créations Uniques</title>
+    <title>Maison Sylla | Élégance & Minimalisme</title>
     
     <!-- Meta Ads Pixel (Placeholder) -->
     <!-- Place ton code Pixel Facebook ici plus tard -->
@@ -12,14 +12,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* Couleurs : Chaudes, naturelles, inspirant la confiance */
+        /* Couleurs : Minimalistes, Premium (Noir & Blanc) */
         :root {
-            --primary: #C07F5A; /* Terracotta chaleureux */
-            --primary-hover: #A56847;
-            --bg-color: #FAF8F5; /* Blanc cassé doux */
-            --text-dark: #2C3E50;
-            --text-light: #7F8C8D;
+            --primary: #000000; 
+            --primary-hover: #333333;
+            --bg-color: #FFFFFF; 
+            --text-dark: #000000;
+            --text-light: #666666;
             --white: #FFFFFF;
+            --border-color: #E5E5E5;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,31 +39,37 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .logo {
-            font-family: 'Lora', serif;
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+            object-fit: contain;
         }
 
         .panier-btn {
-            background: var(--bg-color);
-            border: 2px solid var(--primary);
+            background: var(--white);
+            border: 1px solid var(--primary);
             color: var(--primary);
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 0px; /* Bords carrés style luxe */
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 8px;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
         }
 
         .panier-btn:hover {
@@ -73,22 +80,26 @@
         /* --- HERO SECTION --- */
         .hero {
             text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(rgba(250, 248, 245, 0.9), rgba(250, 248, 245, 0.9)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
         }
 
         .hero h1 {
             font-family: 'Lora', serif;
-            font-size: 42px;
+            font-size: 48px;
             color: var(--text-dark);
             margin-bottom: 15px;
+            font-weight: 400;
+            letter-spacing: 2px;
         }
 
         .hero p {
-            font-size: 18px;
-            color: var(--text-light);
+            font-size: 16px;
+            color: var(--text-dark);
             max-width: 600px;
             margin: 0 auto 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         /* --- PRODUITS --- */
@@ -103,143 +114,158 @@
             font-family: 'Lora', serif;
             font-size: 32px;
             margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .grid-produits {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 40px;
         }
 
         .produit-carte {
             background: var(--white);
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border-radius: 0px;
+            padding: 0;
+            text-align: left;
+            box-shadow: none;
             transition: transform 0.3s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            border: 1px solid transparent;
         }
 
         .produit-carte:hover {
             transform: translateY(-5px);
         }
 
-        .produit-image {
-            font-size: 70px;
+        .produit-image-container {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
             margin-bottom: 15px;
-            background: var(--bg-color);
-            border-radius: 10px;
-            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .produit-image-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .produit-carte:hover .produit-image-img {
+            transform: scale(1.05);
         }
 
         .produit-nom {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .produit-desc {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-light);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .produit-prix {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-dark);
+            margin-bottom: 15px;
         }
 
         .btn-acheter {
-            background: var(--primary);
-            color: var(--white);
-            border: none;
+            background: var(--white);
+            color: var(--primary);
+            border: 1px solid var(--primary);
             padding: 12px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 0px;
+            font-size: 13px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             cursor: pointer;
             width: 100%;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
         }
 
         .btn-acheter:hover {
-            background: var(--primary-hover);
+            background: var(--primary);
+            color: var(--white);
         }
 
         /* --- FOOTER (Confiance) --- */
         footer {
-            background: var(--white);
-            padding: 40px 20px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 60px 20px 30px;
             text-align: center;
-            border-top: 1px solid #eee;
-            margin-top: 50px;
+            border-top: none;
+            margin-top: 80px;
         }
 
         .reassurance {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 50px;
             flex-wrap: wrap;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .badge {
-            color: var(--text-light);
-            font-size: 14px;
+            color: #CCCCCC;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .badge span { display: block; font-size: 24px; margin-bottom: 5px; }
+        .badge span { display: none; } /* On masque les emojis du footer pour le côté luxe */
+        
+        /* Surcharge pour le footer */
+        footer p { color: #999999 !important; }
 
         /* --- NOUVEAUTÉS : TOAST ET MODAL --- */
         #toast {
             visibility: hidden;
             min-width: 250px;
-            background-color: #2C3E50;
-            color: #fff;
-            text-align: center;
-            border-radius: 8px;
-            padding: 16px;
-            position: fixed;
-            z-index: 1000;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%);
-            font-size: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        #toast.show {
-            visibility: visible;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
-        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 200;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.6);
-            justify-content: center;
+            background-color: var(--primary);
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 0px;
             align-items: center;
         }
         .modal-content {
             background-color: var(--white);
-            padding: 30px;
-            border-radius: 12px;
+            padding: 40px;
+            border-radius: 0px;
             width: 90%;
             max-width: 500px;
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+        .modal-header h2 {
+            font-family: 'Lora', serif;
+            font-weight: 400;
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .modal-header {
             display: flex;
@@ -270,28 +296,30 @@
         .form-group input {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 0px;
             font-family: inherit;
+            background-color: #FAFAFA;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
         }
         #cart-summary {
-            background: var(--bg-color);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: left;
-            font-size: 14px;
-        }
-        #cart-summary ul { padding-left: 20px; margin-bottom: 10px; }
+            background: #FAFAFA;
+            border: 1px solid var(--border-color);
+            border-radius: 0px;
         #cart-summary li { margin-bottom: 5px; }
         .btn-valider {
-            background: #25D366; /* Vert WhatsApp */
-            color: white;
+            background: var(--primary);
+            color: var(--white);
             border: none;
-            padding: 14px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 15px;
+            border-radius: 0px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
             cursor: pointer;
             width: 100%;
             display: flex;
@@ -299,30 +327,32 @@
             align-items: center;
             gap: 10px;
             transition: background 0.3s;
+            margin-top: 20px;
         }
-        .btn-valider:hover { background: #20BD5A; }
+        .btn-valider:hover { background: var(--primary-hover); }
     </style>
 </head>
 <body>
 
     <!-- Navigation -->
     <nav>
-        <div class="logo">Maison Authentique.</div>
+        <div class="logo">
+            <img src="https://i.postimg.cc/brmfSTwX/Gemini-Generated-Image-r0pb7rr0pb7rr0pb.png" alt="Maison Sylla">
+        </div>
         <button class="panier-btn" onclick="voirPanier()">
-            🛒 <span id="compteur-panier">0</span>
-            <span id="total-panier" style="margin-left: 5px;">0 FCFA</span>
+            Panier <span id="compteur-panier" style="margin-left: 5px;">(0)</span>
         </button>
     </nav>
 
     <!-- En-tête (Hero) -->
     <header class="hero">
-        <h1>L'authenticité, conçue pour vous.</h1>
-        <p>Découvrez notre sélection de créations uniques. Chaque pièce raconte une histoire, prête à rejoindre la vôtre.</p>
+        <h1>Maison Sylla</h1>
+        <p>L'élégance au quotidien. Découvrez notre collection exclusive.</p>
     </header>
 
     <!-- Liste des produits -->
     <main class="container">
-        <h2 class="section-title">Nos Nouveautés</h2>
+        <h2 class="section-title">La Collection</h2>
         <div id="grille-produits" class="grid-produits">
             <p style="text-align:center; width: 100%; color: #7F8C8D;">Chargement de la collection...</p>
         </div>
@@ -331,11 +361,11 @@
     <!-- Pied de page (Réassurance Client) -->
     <footer>
         <div class="reassurance">
-            <div class="badge"><span>🔒</span>Paiement 100% Sécurisé</div>
-            <div class="badge"><span>🚚</span>Livraison Rapide</div>
-            <div class="badge"><span>💬</span>Service Client Réactif</div>
+            <div class="badge">Paiement Sécurisé</div>
+            <div class="badge">Livraison Premium</div>
+            <div class="badge">Service Clientèle</div>
         </div>
-        <p style="color: var(--text-light); font-size: 13px;">&copy; 2026 Maison Authentique. Tous droits réservés.</p>
+        <p style="color: var(--text-light); font-size: 13px;">&copy; 2026 Maison Sylla. Tous droits réservés.</p>
     </footer>
 
     <!-- Notification Toast (Non intrusive) -->
@@ -354,22 +384,22 @@
             </div>
 
             <form id="form-commande" onsubmit="envoyerCommande(event)">
-                <div class="form-group">
-                    <label for="client-nom">Votre Nom & Prénom *</label>
-                    <input type="text" id="client-nom" required placeholder="Ex: Jean Dupont">
-                </div>
-                <div class="form-group">
-                    <label for="client-ville">Ville / Quartier de livraison *</label>
-                    <input type="text" id="client-ville" required placeholder="Ex: Abidjan, Cocody">
-                </div>
-                <div class="form-group">
-                    <label for="client-tel">Votre numéro de téléphone (Optionnel)</label>
-                    <input type="tel" id="client-tel" placeholder="Pour vous joindre facilement">
-                </div>
-                <button type="submit" class="btn-valider">
-                    💬 Commander via WhatsApp
-                </button>
-            </form>
+            <div class="form-group">
+                <label for="client-nom">Nom & Prénom</label>
+                <input type="text" id="client-nom" required placeholder="Ex: Jean Dupont">
+            </div>
+            <div class="form-group">
+                <label for="client-ville">Ville / Quartier</label>
+                <input type="text" id="client-ville" required placeholder="Ex: Abidjan, Cocody">
+            </div>
+            <div class="form-group">
+                <label for="client-tel">Téléphone</label>
+                <input type="tel" id="client-tel" placeholder="Pour la livraison">
+            </div>
+            <button type="submit" class="btn-valider">
+                Valider la commande
+            </button>
+        </form>
         </div>
     </div>
 
@@ -398,24 +428,23 @@
         }
 
         // Fonction d'ajout au panier
-        function ajouterAuPanier(prix, nom) {
-            if (panier[nom]) {
-                panier[nom].quantite++;
-            } else {
-                panier[nom] = { prix: prix, quantite: 1 };
-            }
-
-            panierArticles++;
-            panierTotal += prix;
-            
-            document.getElementById('compteur-panier').innerText = panierArticles;
-            document.getElementById('total-panier').innerText = formaterFCFA(panierTotal);
-
-            // On utilise la nouvelle notification élégante !
-            afficherToast("✅ " + nom + " ajouté au panier !");
+    function ajouterAuPanier(prix, nom) {
+        if (panier[nom]) {
+            panier[nom].quantite++;
+        } else {
+            panier[nom] = { prix: prix, quantite: 1 };
         }
 
-        // --- NOUVEAU : Gestion de la fenêtre Modale ---
+        panierArticles++;
+        panierTotal += prix;
+        
+        document.getElementById('compteur-panier').innerText = `(${panierArticles})`;
+        
+        // On utilise la nouvelle notification élégante sans emoji !
+        afficherToast(nom + " a été ajouté.");
+    }
+
+    // --- NOUVEAU : Gestion de la fenêtre Modale ---
         function fermerModal() {
             document.getElementById('modal-commande').style.display = "none";
         }
@@ -450,83 +479,96 @@
         }
 
         // Fonction activée quand le client clique sur "Commander via WhatsApp"
-        function envoyerCommande(event) {
-            event.preventDefault(); // Empêche le rechargement de la page
+    function envoyerCommande(event) {
+        event.preventDefault(); // Empêche le rechargement de la page
 
-            // Récupération des infos tapées par le client
-            const nomClient = document.getElementById('client-nom').value;
-            const villeClient = document.getElementById('client-ville').value;
-            const telClient = document.getElementById('client-tel').value;
+        // Récupération des infos tapées par le client
+        const nomClient = document.getElementById('client-nom').value;
+        const villeClient = document.getElementById('client-ville').value;
+        const telClient = document.getElementById('client-tel').value;
 
-            // Construction du message WhatsApp
-            let message = `👋 Bonjour Maison Authentique !\n\n`;
-            message += `Je suis *${nomClient}*\n`;
-            message += `📍 Livraison : ${villeClient}\n`;
-            if(telClient) message += `📞 Contact : ${telClient}\n`;
-            message += `\nJe souhaite valider la commande suivante :\n\n`;
-            
-            for (const [nom, details] of Object.entries(panier)) {
-                let prixLigne = details.prix * details.quantite;
-                message += `▪️ ${details.quantite}x ${nom} (${formaterFCFA(prixLigne)})\n`;
-            }
-            
-            message += `\n*💰 TOTAL À PAYER : ${formaterFCFA(panierTotal)}*\n\n`;
-            message += "Merci de m'indiquer la marche à suivre pour la livraison. 🚚";
-
-            let messageEncode = encodeURIComponent(message);
-            
-            // Fermer la fenêtre et ouvrir WhatsApp
-            fermerModal();
-            window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${messageEncode}`, '_blank');
-
-            // --- NOUVEAUTÉ : VIDER LE PANIER APRÈS LA COMMANDE ---
-            panier = {};               // Vide la mémoire des articles
-            panierArticles = 0;        // Remet le compteur à 0
-            panierTotal = 0;           // Remet le prix à 0
-            
-            // Met à jour l'affichage en haut de la page
-            document.getElementById('compteur-panier').innerText = "0";
-            document.getElementById('total-panier').innerText = "0 FCFA";
-            
-            // Vide les champs du formulaire (Nom, Ville, Tel)
-            document.getElementById('form-commande').reset(); 
-
-            // Petit message sympa pour le retour sur le site
-            setTimeout(() => afficherToast("🎉 Merci pour votre commande !"), 1000);
+        // Construction du message WhatsApp
+        let message = `Bonjour Maison Sylla,\n\n`;
+        message += `Je suis ${nomClient}\n`;
+        message += `Livraison : ${villeClient}\n`;
+        if(telClient) message += `Contact : ${telClient}\n`;
+        message += `\nJe souhaite valider la commande suivante :\n\n`;
+        
+        for (const [nom, details] of Object.entries(panier)) {
+            let prixLigne = details.prix * details.quantite;
+            message += `- ${details.quantite}x ${nom} (${formaterFCFA(prixLigne)})\n`;
         }
+        
+        message += `\nTOTAL : ${formaterFCFA(panierTotal)}\n\n`;
+        message += "Merci de m'indiquer la marche à suivre pour la livraison.";
 
-        // Récupération des produits depuis le serveur Python
-        const conteneur = document.getElementById('grille-produits');
+        let messageEncode = encodeURIComponent(message);
+        
+        // Fermer la fenêtre et ouvrir WhatsApp
+        fermerModal();
+        window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${messageEncode}`, '_blank');
 
-        // Données de secours au cas où le serveur Python dort (Vercel Serverless)
-        const produitsSecours = [
-            {"id": 1, "nom": "Sac en Cuir Artisanal", "description": "Fait main avec passion.", "prix": 25000, "image": "👜"},
-            {"id": 2, "nom": "Collier Traditionnel", "description": "Authenticité et raffinement.", "prix": 12500, "image": "📿"}
-        ];
+        // --- NOUVEAUTÉ : VIDER LE PANIER APRÈS LA COMMANDE ---
+        panier = {};               
+        panierArticles = 0;        
+        panierTotal = 0;           
+        
+        // Met à jour l'affichage en haut de la page
+        document.getElementById('compteur-panier').innerText = "(0)";
+        
+        // Vide les champs du formulaire (Nom, Ville, Tel)
+        document.getElementById('form-commande').reset(); 
 
-        function afficherProduits(produits) {
-            conteneur.innerHTML = ''; 
-            produits.forEach(produit => {
-                const article = document.createElement('article');
-                article.className = 'produit-carte';
-                article.innerHTML = `
-                    <div>
-                        <div class="produit-image">${produit.image}</div>
-                        <h3 class="produit-nom">${produit.nom}</h3>
-                        <p class="produit-desc">${produit.description}</p>
-                    </div>
-                    <div>
-                        <div class="produit-prix">${formaterFCFA(produit.prix)}</div>
-                        <button class="btn-acheter" onclick="ajouterAuPanier(${produit.prix}, '${produit.nom.replace(/'/g, "\\'")}')">
-                            Ajouter au panier
-                        </button>
-                    </div>
-                `;
-                conteneur.appendChild(article);
-            });
+        // Petit message sympa pour le retour sur le site
+        setTimeout(() => afficherToast("Merci pour votre commande."), 1000);
+    }
+
+    // Récupération des produits depuis le serveur Python
+    const conteneur = document.getElementById('grille-produits');
+
+    // Données de secours au cas où le serveur Python dort (Vercel Serverless)
+    const produitsSecours = [
+        {
+            "id": 1, 
+            "nom": "Le Sac Classique", 
+            "description": "Cuir véritable, finitions parfaites.", 
+            "prix": 45000, 
+            "image": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2, 
+            "nom": "Collier Minimaliste", 
+            "description": "Argent massif, élégance discrète.", 
+            "prix": 25000, 
+            "image": "https://images.unsplash.com/photo-1599643478524-fb66f7280459?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
         }
+    ];
 
-        // Appel à l'API Python
+    function afficherProduits(produits) {
+        conteneur.innerHTML = ''; 
+        produits.forEach(produit => {
+            const article = document.createElement('article');
+            article.className = 'produit-carte';
+            article.innerHTML = `
+                <div>
+                    <div class="produit-image-container">
+                        <img src="${produit.image}" alt="${produit.nom}" class="produit-image-img">
+                    </div>
+                    <h3 class="produit-nom">${produit.nom}</h3>
+                    <p class="produit-desc">${produit.description}</p>
+                </div>
+                <div>
+                    <div class="produit-prix">${formaterFCFA(produit.prix)}</div>
+                    <button class="btn-acheter" onclick="ajouterAuPanier(${produit.prix}, '${produit.nom.replace(/'/g, "\\'")}')">
+                        Ajouter au panier
+                    </button>
+                </div>
+            `;
+            conteneur.appendChild(article);
+        });
+    }
+
+    // Appel à l'API Python
         fetch('/api')
             .then(response => {
                 if(!response.ok) throw new Error("API indisponible");
