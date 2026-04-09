@@ -12,7 +12,6 @@
         text-align: center;
         padding: 20px;
       }
-      /* La barre du haut avec le panier */
       .header {
         display: flex;
         justify-content: space-between;
@@ -25,11 +24,15 @@
       }
       .panier {
         font-size: 18px;
-        font-weight: bold;
         background: #0070f3;
         color: white;
-        padding: 10px 15px;
+        padding: 10px 20px;
         border-radius: 8px;
+      }
+      .panier-total {
+        font-weight: bold;
+        color: #ffd700; /* Couleur dorée pour l'argent */
+        margin-left: 10px;
       }
       
       #liste-produits {
@@ -71,7 +74,10 @@
     
     <div class="header">
       <h1>Ma Boutique Premium 🛍️</h1>
-      <div class="panier">🛒 Panier : <span id="compteur-panier">0</span> article(s)</div>
+      <div class="panier">
+        🛒 <span id="compteur-panier">0</span> article(s)
+        <span class="panier-total">- Total: <span id="prix-total">0.00</span> €</span>
+      </div>
     </div>
     
     <div id="liste-produits">
@@ -79,13 +85,18 @@
     </div>
 
     <script>
-      // GESTION DU PANIER
+      // GESTION DU PANIER INTELLIGENT
       let nombreArticles = 0;
+      let prixTotal = 0.0;
       
-      // Fonction qui s'active quand on clique sur un bouton
-      function ajouterAuPanier() {
+      // La fonction reçoit maintenant le prix de l'article cliqué
+      function ajouterAuPanier(prixDuProduit) {
         nombreArticles = nombreArticles + 1;
+        prixTotal = prixTotal + prixDuProduit; // On additionne le prix
+        
+        // On met à jour l'affichage sur la page
         document.getElementById('compteur-panier').innerText = nombreArticles;
+        document.getElementById('prix-total').innerText = prixTotal.toFixed(2); // .toFixed(2) garde 2 chiffres après la virgule
       }
 
       // CONNEXION À PYTHON (FASTAPI)
@@ -98,11 +109,12 @@
           produits.forEach(produit => {
             const div = document.createElement('div');
             div.className = 'produit';
+            // Regarde le bouton : on lui passe maintenant ${produit.prix} !
             div.innerHTML = `
               <div class="emoji-img">${produit.image}</div>
               <h2>${produit.nom}</h2>
               <p>Prix : <strong>${produit.prix.toFixed(2)} €</strong></p>
-              <button onclick="ajouterAuPanier()">Ajouter au panier</button>
+              <button onclick="ajouterAuPanier(${produit.prix})">Ajouter au panier</button>
             `;
             conteneur.appendChild(div);
           });
