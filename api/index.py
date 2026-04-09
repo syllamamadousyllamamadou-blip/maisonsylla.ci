@@ -1,10 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# On crée notre application
 app = FastAPI()
 
-# On autorise notre site web à discuter avec cette application
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,11 +11,36 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Notre nouvelle liste de produits avec des emojis en guise d'images !
 @app.get("/api")
 def lire_produits():
+    # Catalogue mis à jour pour un rendu professionnel en Franc CFA
     return [
-        {"id": 1, "nom": "T-shirt Super Python", "prix": 25.00, "image": "🐍"},
-        {"id": 2, "nom": "Tasse du Développeur", "prix": 15.50, "image": "☕"},
-        {"id": 3, "nom": "Clavier Mécanique", "prix": 120.00, "image": "⌨️"}
+        {
+            "id": 1, 
+            "nom": "Sac en Cuir Artisanal", 
+            "description": "Fait main avec passion. Élégant et robuste pour votre quotidien.",
+            "prix": 25000, 
+            "image": "👜"
+        },
+        {
+            "id": 2, 
+            "nom": "Collier Traditionnel", 
+            "description": "Authenticité et raffinement pour sublimer vos tenues.",
+            "prix": 12500, 
+            "image": "📿"
+        },
+        {
+            "id": 3, 
+            "nom": "Ensemble Coton Bio", 
+            "description": "Confort absolu et respect de l'environnement.",
+            "prix": 18000, 
+            "image": "👕"
+        },
+        {
+            "id": 4, 
+            "nom": "Sandales Tressées", 
+            "description": "Légères et confortables, parfaites pour la saison.",
+            "prix": 15000, 
+            "image": "👡"
+        }
     ]
