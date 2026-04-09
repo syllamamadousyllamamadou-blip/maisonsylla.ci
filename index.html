@@ -2,25 +2,23 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Sylla | Élégance & Minimalisme</title>
+    <!-- Balise CRUCIALE pour le mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Maison Sylla | Boutique Officielle</title>
     
-    <!-- Meta Ads Pixel (Placeholder) -->
-    <!-- Place ton code Pixel Facebook ici plus tard -->
-    
-    <!-- Polices Google pour un look Pro et Humain -->
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Polices Google : Poppins pour le côté sport/moderne, robuste -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Couleurs : Minimalistes, Premium (Noir & Blanc) */
+        /* Couleurs et Variables */
         :root {
             --primary: #000000; 
-            --primary-hover: #333333;
             --bg-color: #FFFFFF; 
             --text-dark: #000000;
-            --text-light: #666666;
+            --text-light: #767677; /* Gris typique des sites e-commerce */
             --white: #FFFFFF;
-            --border-color: #E5E5E5;
+            --border-color: #EBEBEB;
+            --alert-red: #E02B27; /* Rouge pour les badges/alertes */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,13 +27,14 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-dark);
-            line-height: 1.6;
+            /* Empêche le défilement horizontal sur mobile */
+            overflow-x: hidden; 
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION (Mobile First) --- */
         nav {
             background: var(--white);
-            padding: 15px 5%;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -43,201 +42,219 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            height: 70px;
         }
 
-        .nav-left { flex: 1; }
+        /* Menu Hamburger (Icone textuelle simple) */
+        .menu-icon {
+            font-size: 24px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 33%;
+        }
 
+        /* Logo calé à gauche sur Desktop, au centre-gauche sur mobile */
         .logo {
-            flex: 1;
             display: flex;
+            align-items: center;
             justify-content: center;
+            width: 33%;
         }
-        
-        /* Mise à jour : Plus besoin de mix-blend-mode avec un vrai PNG transparent ! */
         .logo img {
-            height: 70px; 
+            height: 45px; /* Optimisé pour mobile */
             object-fit: contain;
         }
 
+        /* Panier à droite */
         .nav-right {
-            flex: 1;
+            width: 33%;
             display: flex;
             justify-content: flex-end;
         }
 
         .panier-btn {
-            background: var(--white);
-            border: 1px solid var(--primary);
+            background: transparent;
+            border: none;
             color: var(--primary);
-            padding: 10px 20px;
-            border-radius: 0px;
             font-family: 'Poppins', sans-serif;
-            font-weight: 400;
+            font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
-            text-transform: uppercase;
-            font-size: 13px;
-            letter-spacing: 1px;
+            gap: 5px;
         }
 
-        .panier-btn:hover {
+        .cart-count {
             background: var(--primary);
             color: var(--white);
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 50%; /* Cercle noir type app mobile */
         }
 
-        /* Animation quand on ajoute un article */
-        @keyframes pulse-cart {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); background-color: var(--primary); color: var(--white); }
-            100% { transform: scale(1); }
-        }
-        .pulse {
-            animation: pulse-cart 0.4s ease;
-        }
-
-        /* --- HERO SECTION --- */
+        /* --- NOUVEAU HERO BANNER (Style Edito/Sport) --- */
         .hero {
-            text-align: center;
-            padding: 100px 20px;
-            /* J'ai mis ta nouvelle bannière et réduit un peu le voile blanc pour mieux la voir */
-            background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://i.postimg.cc/ZnWFSb2z/AKWABA.png') center/cover;
+            position: relative;
+            height: 70vh; /* Prend 70% de l'écran */
+            min-height: 400px;
+            background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://i.postimg.cc/ZnWFSb2z/AKWABA.png') center/cover no-repeat;
+            display: flex;
+            align-items: flex-end; /* Texte en bas */
+            padding: 40px 20px;
+        }
+        
+        /* Assombrit légèrement l'image pour lire le texte si besoin (Désactivé ici car fond blanc) */
+        /*
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+        }
+        */
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            color: var(--primary); /* Texte en noir pour contraster avec la bannière claire */
         }
 
         .hero h1 {
-            font-family: 'Lora', serif;
-            font-size: 48px;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-            font-weight: 400;
-            letter-spacing: 2px;
+            font-size: 40px;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
         }
 
         .hero p {
             font-size: 16px;
-            color: var(--text-dark);
-            max-width: 600px;
-            margin: 0 auto 30px;
-            font-weight: 300;
-            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
 
-        /* --- PRODUITS --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 50px 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-family: 'Lora', serif;
-            font-size: 32px;
-            margin-bottom: 40px;
+        .hero-btn {
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 24px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            font-weight: 800;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- CATÉGORIES (Scroll horizontal sur mobile) --- */
+        .categories-wrapper {
+            padding: 20px;
+            overflow-x: auto; /* Permet le swipe au doigt */
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        /* Cache la barre de scroll */
+        .categories-wrapper::-webkit-scrollbar { display: none; }
+
+        .cat-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            padding: 8px 20px;
+            margin-right: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .cat-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* --- PRODUITS (Grille Mobile First) --- */
+        .container {
+            padding: 30px 20px;
         }
 
         .grid-produits {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
+            /* Le secret Adidas : 2 colonnes sur mobile ! */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px; /* Espacement réduit pour mobile */
         }
 
         .produit-carte {
-            background: var(--white);
-            text-align: left;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            cursor: pointer;
         }
 
         .produit-image-container {
             width: 100%;
-            height: 350px;
+            aspect-ratio: 4/5; /* Format portrait idéal pour la mode */
+            background-color: #F4F4F4;
+            position: relative;
             overflow: hidden;
-            margin-bottom: 15px;
-            background-color: #f9f9f9;
+            margin-bottom: 10px;
         }
 
         .produit-image-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
         }
 
-        .produit-carte:hover .produit-image-img {
-            transform: scale(1.05);
+        .badge-produit {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--white);
+            color: var(--primary);
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 8px;
+            text-transform: uppercase;
         }
 
         .produit-nom {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .produit-desc {
             font-size: 13px;
-            color: var(--text-light);
-            margin-bottom: 15px;
+            font-weight: 400;
+            margin-bottom: 2px;
+            text-transform: uppercase;
         }
 
         .produit-prix {
-            font-size: 16px;
-            font-weight: 400;
-            color: var(--text-dark);
-            margin-bottom: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 10px;
         }
 
         .btn-acheter {
             background: var(--white);
             color: var(--primary);
             border: 1px solid var(--primary);
-            padding: 12px;
-            font-size: 13px;
-            font-weight: 400;
+            padding: 10px;
+            font-size: 12px;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
             cursor: pointer;
             width: 100%;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .btn-acheter:hover {
             background: var(--primary);
             color: var(--white);
         }
-
-        /* --- FOOTER (Confiance) --- */
-        footer {
-            background: var(--primary);
-            color: var(--white);
-            padding: 60px 20px 30px;
-            text-align: center;
-            margin-top: 80px;
-        }
-
-        .reassurance {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-
-        .badge {
-            color: #CCCCCC;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        footer p { color: #999999 !important; }
 
         /* --- TOAST & MODAL --- */
         #toast {
@@ -246,7 +263,7 @@
             background-color: var(--primary);
             color: var(--white);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 600;
             font-size: 12px;
             text-align: center;
             padding: 15px;
@@ -255,203 +272,148 @@
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-        #toast.show {
-            visibility: visible;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
+        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
 
-        /* Correction du Modal */
         .modal {
-            display: none; /* C'est cette ligne qui foirait dans ton code ! */
+            display: none;
             position: fixed;
             z-index: 200;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.6);
-            justify-content: center;
-            align-items: center;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center; align-items: flex-end; /* Apparaît par le bas sur mobile */
         }
         .modal-content {
             background-color: var(--white);
-            padding: 40px;
-            width: 90%;
-            max-width: 500px;
+            padding: 30px 20px;
+            width: 100%;
+            border-radius: 20px 20px 0 0; /* Bords arrondis en haut style App iOS */
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: slideUp 0.3s ease-out;
         }
+        @keyframes slideUp { from {transform: translateY(100%);} to {transform: translateY(0);} }
+        
         .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-        }
-        .modal-header h2 {
-            font-family: 'Lora', serif;
-            font-weight: 400;
-            font-size: 22px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 0;
-        }
-        .close-btn {
-            font-size: 28px;
-            cursor: pointer;
-            color: var(--text-light);
-        }
-        .close-btn:hover { color: var(--primary); }
-        
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            font-size: 13px;
-            color: var(--text-dark);
-            text-transform: uppercase;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            font-family: inherit;
-            background-color: #FAFAFA;
-        }
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        #cart-summary {
-            background: #FAFAFA;
-            border: 1px solid var(--border-color);
-            padding: 15px;
+            display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 20px;
-            font-size: 14px;
         }
-        #cart-summary ul { padding-left: 20px; margin-top: 10px; margin-bottom: 10px;}
-        #cart-summary li { margin-bottom: 5px; }
+        .modal-header h2 { font-size: 20px; font-weight: 800; text-transform: uppercase; margin: 0; }
+        .close-btn { font-size: 30px; cursor: pointer; line-height: 1; }
         
-        .disclaimer {
-            font-size: 12px;
-            color: var(--text-light);
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 10px;
+        .form-group { margin-bottom: 15px; }
+        .form-group input {
+            width: 100%; padding: 15px; border: 1px solid var(--border-color);
+            background-color: #F9F9F9; font-family: inherit; font-size: 14px;
+        }
+        .form-group input:focus { outline: none; border-color: var(--primary); }
+        
+        #cart-summary {
+            background: #F9F9F9; padding: 15px; margin-bottom: 20px; font-size: 13px;
+        }
+        #cart-summary ul { padding-left: 20px; margin: 10px 0;}
+        
+        .btn-valider {
+            background: var(--primary); color: var(--white); border: none;
+            padding: 18px; font-size: 14px; text-transform: uppercase; font-weight: 800;
+            cursor: pointer; width: 100%; margin-top: 10px;
         }
 
-        .btn-valider {
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            padding: 15px;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 400;
-            cursor: pointer;
-            width: 100%;
-            transition: background 0.3s;
+        /* --- RESPONSIVE DESKTOP (Ecrans d'ordinateur) --- */
+        @media (min-width: 768px) {
+            .grid-produits { grid-template-columns: repeat(4, 1fr); gap: 30px; }
+            .hero { height: 80vh; padding: 80px 5%; }
+            .hero h1 { font-size: 60px; }
+            .logo { justify-content: flex-start; }
+            nav { padding: 15px 5%; }
+            .modal { align-items: center; }
+            .modal-content { width: 500px; border-radius: 0; } /* Carré sur PC */
         }
-        .btn-valider:hover { background: var(--primary-hover); }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- Navigation Mobile First -->
     <nav>
-        <div class="nav-left"></div>
+        <div class="menu-icon" onclick="alert('Le menu sera disponible bientôt !')">☰</div>
         <div class="logo">
-            <!-- Ton nouveau logo transparent -->
-            <img src="https://i.postimg.cc/d3RQDdz7/Design-sans-titre-(8).png" alt="Maison Sylla">
+            <img src="https://i.postimg.cc/xJgS5G2F/image.png" alt="Maison Sylla">
         </div>
         <div class="nav-right">
-            <button id="btn-panier-haut" class="panier-btn" onclick="voirPanier()">
-                Panier <span id="compteur-panier" style="margin-left: 5px;">(0)</span>
+            <button class="panier-btn" onclick="voirPanier()">
+                PANIER <span id="compteur-panier" class="cart-count">0</span>
             </button>
         </div>
     </nav>
 
-    <!-- En-tête (Hero) -->
+    <!-- En-tête (Hero) - Style Adidas -->
     <header class="hero">
-        <h1>Maison Sylla</h1>
-        <p>L'élégance au quotidien. Découvrez notre collection exclusive.</p>
+        <div class="hero-content">
+            <h1>Nouvelle<br>Collection</h1>
+            <p>Redéfinissez vos standards. L'excellence au quotidien.</p>
+            <button class="hero-btn" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+                DÉCOUVRIR →
+            </button>
+        </div>
     </header>
 
-    <!-- Liste des produits -->
+    <!-- Filtres Catégories (Scrollable) -->
+    <div class="categories-wrapper" id="shop">
+        <button class="cat-btn active" onclick="filtrerProduits('Tout', this)">Tout afficher</button>
+        <button class="cat-btn" onclick="filtrerProduits('Sacs', this)">Sacs</button>
+        <button class="cat-btn" onclick="filtrerProduits('Bijoux', this)">Bijoux</button>
+        <button class="cat-btn" onclick="filtrerProduits('Accessoires', this)">Accessoires</button>
+    </div>
+
+    <!-- Liste des produits (2 colonnes sur mobile) -->
     <main class="container">
-        <h2 class="section-title">La Collection</h2>
         <div id="grille-produits" class="grid-produits">
-            <p style="text-align:center; width: 100%; color: #7F8C8D;">Chargement de la collection...</p>
+            <p style="grid-column: 1 / -1; text-align:center;">Chargement du catalogue...</p>
         </div>
     </main>
 
-    <!-- Pied de page -->
-    <footer>
-        <div class="reassurance">
-            <div class="badge">Paiement Sécurisé</div>
-            <div class="badge">Livraison Premium</div>
-            <div class="badge">Service Clientèle</div>
-        </div>
-        <p>&copy; 2026 Maison Sylla. Tous droits réservés.</p>
-    </footer>
-
     <!-- Notification Toast -->
-    <div id="toast">Article ajouté au panier !</div>
+    <div id="toast">Ajouté au panier</div>
 
-    <!-- Modal de Validation de Commande -->
+    <!-- Modal de Commande (Tiroir du bas sur mobile) -->
     <div id="modal-commande" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Votre Commande</h2>
+                <h2>Panier</h2>
                 <span class="close-btn" onclick="fermerModal()">&times;</span>
             </div>
             
-            <div id="cart-summary">
-                <!-- Injecté par JS -->
-            </div>
+            <div id="cart-summary"></div>
 
             <form id="form-commande" onsubmit="envoyerCommande(event)">
                 <div class="form-group">
-                    <label for="client-nom">Nom & Prénom</label>
-                    <input type="text" id="client-nom" required placeholder="Ex: Jean Dupont">
+                    <input type="text" id="client-nom" required placeholder="Nom complet">
                 </div>
                 <div class="form-group">
-                    <label for="client-ville">Ville / Quartier</label>
-                    <input type="text" id="client-ville" required placeholder="Ex: Abidjan, Cocody">
+                    <input type="text" id="client-ville" required placeholder="Ville de livraison">
                 </div>
                 <div class="form-group">
-                    <label for="client-tel">Téléphone</label>
-                    <input type="tel" id="client-tel" placeholder="Pour la livraison">
+                    <input type="tel" id="client-tel" placeholder="Numéro de téléphone">
                 </div>
                 
-                <p class="disclaimer">Vous allez être redirigé vers WhatsApp pour confirmer votre commande avec notre équipe en toute sécurité.</p>
+                <p style="font-size: 11px; color: #767677; text-align: center; margin: 15px 0;">
+                    La commande sera finalisée de manière sécurisée via WhatsApp.
+                </p>
                 
-                <button type="submit" class="btn-valider">
-                    Valider la commande
-                </button>
+                <button type="submit" class="btn-valider">VALIDER LA COMMANDE</button>
             </form>
         </div>
     </div>
 
     <!-- LOGIQUE JAVASCRIPT -->
     <script>
-        // Variables du panier
         let panier = {}; 
         let panierArticles = 0;
         let panierTotal = 0;
+        let tousLesProduits = []; // Stocke les produits pour le filtrage
 
-        // TON NUMÉRO WHATSAPP 
         const NUMERO_WHATSAPP = "2250758245530"; 
 
         function formaterFCFA(montant) {
@@ -462,68 +424,44 @@
             const toast = document.getElementById("toast");
             toast.innerText = message;
             toast.className = "show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
         }
 
-        // Fonction d'ajout au panier AVEC RETOUR VISUEL CLAIR
         function ajouterAuPanier(prix, nom, bouton) {
-            if (panier[nom]) {
-                panier[nom].quantite++;
-            } else {
-                panier[nom] = { prix: prix, quantite: 1 };
-            }
+            if (panier[nom]) panier[nom].quantite++;
+            else panier[nom] = { prix: prix, quantite: 1 };
 
             panierArticles++;
             panierTotal += prix;
             
-            // Mise à jour du compteur
-            const btnPanierHaut = document.getElementById('btn-panier-haut');
-            document.getElementById('compteur-panier').innerText = `(${panierArticles})`;
-            
-            // Animation du bouton panier en haut
-            btnPanierHaut.classList.remove('pulse');
-            void btnPanierHaut.offsetWidth; // Force le redémarrage de l'animation
-            btnPanierHaut.classList.add('pulse');
+            document.getElementById('compteur-panier').innerText = panierArticles;
 
-            // Animation du bouton cliqué (retour visuel pour le client)
             const texteOriginal = bouton.innerText;
-            bouton.innerText = "AJOUTÉ ✓";
+            bouton.innerText = "AJOUTÉ";
             bouton.style.backgroundColor = "var(--primary)";
             bouton.style.color = "var(--white)";
-            
             setTimeout(() => {
                 bouton.innerText = texteOriginal;
                 bouton.style.backgroundColor = "";
                 bouton.style.color = "";
-            }, 1500);
+            }, 1000);
 
-            afficherToast(nom + " a été ajouté.");
+            afficherToast("Article ajouté");
         }
 
-        // Gestion de la fenêtre Modale
-        function fermerModal() {
-            document.getElementById('modal-commande').style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('modal-commande');
-            if (event.target == modal) {
-                fermerModal();
-            }
-        }
+        function fermerModal() { document.getElementById('modal-commande').style.display = "none"; }
 
         function voirPanier() {
             if(panierArticles === 0) {
-                afficherToast("Votre panier est vide.");
+                afficherToast("Votre panier est vide");
                 return;
             } 
-
-            let htmlResume = "<strong>Votre sélection :</strong><ul>";
+            let htmlResume = "<ul>";
             for (const [nom, details] of Object.entries(panier)) {
                 let prixLigne = details.prix * details.quantite;
-                htmlResume += `<li>${details.quantite}x ${nom} - ${formaterFCFA(prixLigne)}</li>`;
+                htmlResume += `<li><strong>${details.quantite}x</strong> ${nom} <br><span style="color:#767677">${formaterFCFA(prixLigne)}</span></li>`;
             }
-            htmlResume += `</ul><p style="font-size: 16px; margin-top: 15px; border-top: 1px solid #E5E5E5; padding-top:10px;"><strong>TOTAL : ${formaterFCFA(panierTotal)}</strong></p>`;
+            htmlResume += `</ul><div style="border-top:1px solid #ddd; padding-top:10px; margin-top:10px; font-size:16px;"><strong>TOTAL: ${formaterFCFA(panierTotal)}</strong></div>`;
             
             document.getElementById('cart-summary').innerHTML = htmlResume;
             document.getElementById('modal-commande').style.display = "flex";
@@ -531,95 +469,91 @@
 
         function envoyerCommande(event) {
             event.preventDefault(); 
-
             const nomClient = document.getElementById('client-nom').value;
             const villeClient = document.getElementById('client-ville').value;
             const telClient = document.getElementById('client-tel').value;
 
-            let message = `Bonjour Maison Sylla,\n\n`;
-            message += `Je suis ${nomClient}\n`;
-            message += `Livraison : ${villeClient}\n`;
-            if(telClient) message += `Contact : ${telClient}\n`;
-            message += `\nJe souhaite valider la commande suivante :\n\n`;
+            let message = `*NOUVELLE COMMANDE - MAISON SYLLA*\n\n`;
+            message += `👤 Client : ${nomClient}\n`;
+            message += `📍 Livraison : ${villeClient}\n`;
+            if(telClient) message += `📞 Tel : ${telClient}\n`;
+            message += `\n*ARTICLES :*\n`;
             
             for (const [nom, details] of Object.entries(panier)) {
                 let prixLigne = details.prix * details.quantite;
                 message += `- ${details.quantite}x ${nom} (${formaterFCFA(prixLigne)})\n`;
             }
             
-            message += `\nTOTAL : ${formaterFCFA(panierTotal)}\n\n`;
-            message += "Merci de m'indiquer la marche à suivre pour la livraison.";
+            message += `\n*TOTAL : ${formaterFCFA(panierTotal)}*\n`;
 
             let messageEncode = encodeURIComponent(message);
-            
             fermerModal();
             window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${messageEncode}`, '_blank');
 
-            // VIDER LE PANIER APRÈS LA COMMANDE
-            panier = {};               
-            panierArticles = 0;        
-            panierTotal = 0;           
-            
-            document.getElementById('compteur-panier').innerText = "(0)";
+            panier = {}; panierArticles = 0; panierTotal = 0;           
+            document.getElementById('compteur-panier').innerText = "0";
             document.getElementById('form-commande').reset(); 
-
-            setTimeout(() => afficherToast("Préparation de votre WhatsApp..."), 500);
         }
 
-        // Récupération des produits
+        // --- AFFICHAGE ET FILTRAGE DES PRODUITS ---
         const conteneur = document.getElementById('grille-produits');
-
-        const produitsSecours = [
-            {
-                "id": 1, 
-                "nom": "Le Sac Classique", 
-                "description": "Cuir véritable, finitions parfaites.", 
-                "prix": 45000, 
-                "image": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-            },
-            {
-                "id": 2, 
-                "nom": "Collier Minimaliste", 
-                "description": "Argent massif, élégance discrète.", 
-                "prix": 25000, 
-                "image": "https://images.unsplash.com/photo-1599643478524-fb66f7280459?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-            }
-        ];
 
         function afficherProduits(produits) {
             conteneur.innerHTML = ''; 
+            if(produits.length === 0) {
+                conteneur.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">Aucun produit dans cette catégorie.</p>';
+                return;
+            }
+
             produits.forEach(produit => {
                 const article = document.createElement('article');
                 article.className = 'produit-carte';
+                
+                // Gestion du badge promo/nouveau
+                let badgeHTML = '';
+                if(produit.badge && produit.badge !== "") {
+                    badgeHTML = `<div class="badge-produit">${produit.badge}</div>`;
+                }
+
                 article.innerHTML = `
-                    <div>
-                        <div class="produit-image-container">
-                            <img src="${produit.image}" alt="${produit.nom}" class="produit-image-img">
-                        </div>
-                        <h3 class="produit-nom">${produit.nom}</h3>
-                        <p class="produit-desc">${produit.description}</p>
+                    <div class="produit-image-container">
+                        ${badgeHTML}
+                        <img src="${produit.image}" alt="${produit.nom}" class="produit-image-img">
                     </div>
-                    <div>
-                        <div class="produit-prix">${formaterFCFA(produit.prix)}</div>
-                        <!-- Note ici le 'this' passé dans la fonction pour modifier le bouton cliqué ! -->
-                        <button class="btn-acheter" onclick="ajouterAuPanier(${produit.prix}, '${produit.nom.replace(/'/g, "\\'")}', this)">
-                            Ajouter au panier
-                        </button>
-                    </div>
+                    <h3 class="produit-nom">${produit.nom}</h3>
+                    <div class="produit-prix">${formaterFCFA(produit.prix)}</div>
+                    <button class="btn-acheter" onclick="ajouterAuPanier(${produit.prix}, '${produit.nom.replace(/'/g, "\\'")}', this)">
+                        AJOUTER
+                    </button>
                 `;
                 conteneur.appendChild(article);
             });
         }
 
+        // Fonction pour filtrer quand on clique sur les catégories
+        window.filtrerProduits = function(categorie, elementBouton) {
+            // Mettre à jour le bouton actif
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            elementBouton.classList.add('active');
+
+            if(categorie === 'Tout') {
+                afficherProduits(tousLesProduits);
+            } else {
+                const produitsFiltres = tousLesProduits.filter(p => p.categorie === categorie);
+                afficherProduits(produitsFiltres);
+            }
+        }
+
+        // Chargement initial
         fetch('/api')
-            .then(response => {
-                if(!response.ok) throw new Error("API indisponible");
-                return response.json();
+            .then(response => response.json())
+            .then(produits => {
+                tousLesProduits = produits; // Sauvegarde en mémoire
+                afficherProduits(tousLesProduits);
             })
-            .then(produits => afficherProduits(produits))
             .catch(erreur => {
-                console.log("Utilisation des données de secours.");
-                afficherProduits(produitsSecours);
+                console.log("Erreur API");
+                conteneur.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:red;">Erreur de chargement. Vérifiez le serveur Python.</p>';
             });
     </script>
 </body>
